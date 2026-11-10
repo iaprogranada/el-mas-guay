@@ -15,3 +15,6 @@ export const LEGAL = {
   domicilio: "C/ Emperatriz Eugenia, 18002 Granada (España)",
   email: "info@iapro.top",
 };
+
+// Coronaciones para llevar el check azul de "guay verificado".
+export const VERIFIED_AT = 50;

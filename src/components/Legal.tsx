@@ -1,4 +1,4 @@
-import { LEGAL, SITE } from "@/lib/site";
+import { LEGAL, SITE, VERIFIED_AT } from "@/lib/site";
 
 // Textos legales: los usan la ventana de "Términos de uso" y la página /terminos.
 
@@ -15,6 +15,10 @@ export function TermsContent() {
         Cada coronación cuesta 1 € (IVA incluido) y te coloca en el nº 1 en el momento del pago. No compras un tiempo mínimo:
         puedes seguir arriba un día entero o diez segundos. El Pack pique cuesta 5 € e incluye 5 coronaciones: una se usa al
         pagar y las otras 4 quedan guardadas en tu perfil para volver al nº 1 cuando quieras.
+      </p>
+      <p>
+        Quien llega a {VERIFIED_AT} coronaciones recibe el check azul de «guay verificado». Es solo un distintivo de esta web:
+        no verifica la identidad de nadie.
       </p>
       <h4>Pago y desistimiento</h4>
       <p>El pago se hace con Stripe (tarjeta, Apple Pay o Google Pay). Nunca vemos ni guardamos los datos de tu tarjeta.</p>

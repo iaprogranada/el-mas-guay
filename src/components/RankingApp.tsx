@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ago, clock, dur, fmt, PER_PAGE } from "@/lib/format";
-import { SITE } from "@/lib/site";
+import { SITE, VERIFIED_AT } from "@/lib/site";
 import type { StoryPerson } from "@/lib/story";
 import type { Card, Me, Row, SearchHit, Snapshot } from "@/lib/types";
 import { host } from "@/lib/validation";
@@ -13,6 +13,7 @@ import { RulesContent, TermsContent } from "./Legal";
 import Modal, { closeDialog } from "./Modal";
 import PayDialog, { KEY_ORDER, type Pending, type ProfileKey } from "./PayDialog";
 import SecurePay from "./SecurePay";
+import Verified, { VCheck, VName } from "./Verified";
 
 const KEY_ME = "elmasguay-yo";
 const POLL_MS = 5000;
@@ -113,6 +114,7 @@ function KingCard({
         <span className="ktag">Nº 1 · EL MÁS GUAY DEL MUNDO</span>
         <h2 id="king-name">
           {k.name}
+          <Verified times={k.times} tip space />
           {mine && <> <span className="youtag">TÚ</span></>}
         </h2>
       </div>
@@ -158,6 +160,7 @@ function RankRow({ r, now, mine, enter, flash }: { r: Row; now: number; mine: bo
       <div className="who">
         <div className="name">
           {r.name}
+          <Verified times={r.times} tip />
           {mine && <> <span className="youtag">TÚ</span></>}
           {r.times > 1 && (
             <>
@@ -232,11 +235,14 @@ function SidePanels({
                 <div>
                   {v.l ? (
                     <>
-                      <b>{v.w.name}</b> le quitó el trono a <b>{v.l.name}</b>
+                      <b>{v.w.name}</b>
+                      <Verified times={v.w.times} space /> le quitó el trono a <b>{v.l.name}</b>
+                      <Verified times={v.l.times} space />
                     </>
                   ) : (
                     <>
-                      <b>{v.w.name}</b> estrenó el trono
+                      <b>{v.w.name}</b>
+                      <Verified times={v.w.times} space /> estrenó el trono
                     </>
                   )}
                   <small>
@@ -258,7 +264,7 @@ function SidePanels({
             <div className="duel">
               <div className="p">
                 <Avatar p={snap.pique.a} />
-                <span>{snap.pique.a.name}</span>
+                <VName p={snap.pique.a} />
               </div>
               <div className="score">
                 {snap.pique.a.times}
@@ -267,7 +273,7 @@ function SidePanels({
               </div>
               <div className="p">
                 <Avatar p={snap.pique.b} />
-                <span>{snap.pique.b.name}</span>
+                <VName p={snap.pique.b} />
               </div>
             </div>
             <p className="duelcap">Veces que cada uno ha sido el nº 1</p>
@@ -318,10 +324,7 @@ function FameItem({ c, label, value, extra = "" }: { c: Card; label: string; val
       <div>
         <small>{label}</small>
         <strong>{value}</strong>
-        <span>
-          {c.name}
-          {extra}
-        </span>
+        <VName p={c} extra={extra} />
       </div>
     </li>
   );
@@ -694,6 +697,26 @@ export default function RankingApp({ initial }: { initial: Snapshot }) {
                       </span>
                     </div>
                   </div>
+                  <p className="vgoal">
+                    {me.times >= VERIFIED_AT ? (
+                      <>
+                        <Verified times={me.times} tip />
+                        <span>
+                          Eres <b>guay verificado</b>
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="verified" aria-hidden="true">
+                          <VCheck />
+                        </span>
+                        <span>
+                          Te {VERIFIED_AT - me.times === 1 ? "falta" : "faltan"} <b>{fmt(VERIFIED_AT - me.times)}</b>{" "}
+                          {VERIFIED_AT - me.times === 1 ? "coronación" : "coronaciones"} para el check azul
+                        </span>
+                      </>
+                    )}
+                  </p>
                   {me.credits > 0 && (
                     <p className="hint">
                       Te {me.credits === 1 ? "queda 1 coronación" : `quedan ${me.credits} coronaciones`} del pack.
@@ -738,7 +761,7 @@ export default function RankingApp({ initial }: { initial: Snapshot }) {
                     <li key={h.id}>
                       <button type="button" onClick={() => jump(h.id, h.pos)}>
                         <Avatar p={h} size="sm" />
-                        <span className="nm">{h.name}</span>
+                        <VName p={h} className="nm" />
                         <span className="pos">nº {fmt(h.pos)}</span>
                       </button>
                     </li>
@@ -757,6 +780,7 @@ export default function RankingApp({ initial }: { initial: Snapshot }) {
                 <li>Pagas 1 € y subes al nº 1.</li>
                 <li>Tu foto, tu nombre y tu enlace, arriba del todo.</li>
                 <li>Cuando otro paga, bajas un puesto.</li>
+                <li>Llega a {VERIFIED_AT} coronaciones y tendrás el check azul de guay verificado.</li>
               </ol>
               <p className="hint">{legalLinks}</p>
             </div>

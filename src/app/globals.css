@@ -1,4 +1,4 @@
-/* El Más Guay del Mundo. Mismo diseño que el prototipo cerrado (v11). */
+/* El Más Guay del Mundo. Mismo diseño que el prototipo cerrado (v12). */
 [hidden]{display:none !important}
 html{-webkit-text-size-adjust:100%}
 body{margin:0}
@@ -67,7 +67,7 @@ a{color:inherit}
 .results:empty{display:none}
 .results button{display:flex; align-items:center; gap:10px; width:100%; background:none; border:0; border-radius:12px; padding:6px; text-align:left}
 .results button:hover,.results button:focus-visible{background:rgba(91,75,255,.07)}
-.results .nm{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600}
+.results .nm{min-width:0; font-weight:600}
 .results .pos{font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin-left:auto; white-space:nowrap}
 .hint{font-size:13px; color:var(--ink-soft); margin:10px 0 0}
 
@@ -146,6 +146,21 @@ a{color:inherit}
 @keyframes pop{0%{transform:scale(.97)}100%{transform:none}}
 @keyframes drop{0%{transform:translateY(-80px) rotate(-40deg); opacity:0}60%{opacity:1}100%{transform:rotate(-16deg)}}
 
+/* Check azul: guay verificado (50 coronaciones) */
+.verified{display:inline-grid; place-items:center; flex:none; padding:0; margin:0; border:0; background:none; line-height:0; vertical-align:-.14em; border-radius:50%; cursor:help; color:inherit}
+.verified svg{width:1.05em; height:1.05em; filter:drop-shadow(0 2px 3px rgba(30,139,255,.4))}
+.king h2 .verified svg{width:.62em; height:.62em}
+.vtip{position:fixed; z-index:80; width:max-content; max-width:250px; box-sizing:border-box; background:var(--ink); color:#E9E6FF; border:2px solid #fff; border-radius:14px; padding:10px 12px; font-family:var(--body); font-size:13px; font-weight:500; line-height:1.4; letter-spacing:0; box-shadow:0 18px 30px -14px rgba(22,18,46,.7); pointer-events:none}
+.vtip b{display:flex; align-items:center; gap:6px; color:#8CC8FF; font-family:var(--display); font-weight:700; font-size:14.5px; margin-bottom:3px}
+.vtip b svg{width:18px; height:18px}
+.vgoal{display:flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-soft); margin:10px 0 0}
+.vgoal .verified svg{width:16px; height:16px}
+.vgoal b{color:var(--ink)}
+.vnb{white-space:nowrap}
+.vn{display:flex; align-items:center; gap:4px; min-width:0}
+.vn .vt{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.vn .vx{flex:none; white-space:nowrap; margin-left:-4px}
+
 /* Lista */
 .listhead{display:flex; justify-content:space-between; align-items:baseline; gap:4px 12px; margin:34px 4px 14px; flex-wrap:wrap; scroll-margin-top:calc(var(--head-h) + 20px)}
 .listhead h2{font-family:var(--display); font-weight:700; font-size:1.3rem; letter-spacing:-.03em; margin:0}
@@ -210,7 +225,7 @@ a{color:inherit}
 .duel{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:8px; text-align:center}
 .duel .p{display:flex; flex-direction:column; align-items:center; gap:6px; min-width:0}
 .duel .p .av{width:56px; height:56px; font-size:18px}
-.duel .p span{font-weight:600; font-size:13px; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.duel .p > span{font-weight:600; font-size:13px; max-width:100%; justify-content:center}
 .duel .score{font-family:var(--display); font-weight:800; font-size:1.9rem; letter-spacing:-.04em; font-variant-numeric:tabular-nums; white-space:nowrap}
 .duel .score i{font-style:normal; color:var(--ink-faint); margin:0 4px}
 .duelcap{font-size:12.5px; color:var(--ink-soft); text-align:center; margin:10px 0 0}
@@ -218,7 +233,7 @@ a{color:inherit}
 .fame li{display:grid; grid-template-columns:32px minmax(0,1fr); gap:10px; align-items:center}
 .fame small{display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
 .fame strong{font-family:var(--display); font-weight:700; font-size:1.05rem; letter-spacing:-.02em}
-.fame span{display:block; font-size:13px; color:var(--ink-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.fame div > span{font-size:13px; color:var(--ink-soft)}
 .nums{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .nums b{display:block; font-family:var(--display); font-weight:800; font-size:1.5rem; letter-spacing:-.04em; line-height:1.05; font-variant-numeric:tabular-nums}
 .nums span{font-size:12.5px; color:var(--ink-soft)}
